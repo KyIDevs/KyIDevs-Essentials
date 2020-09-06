@@ -32,7 +32,7 @@ npm run dev
 ### Post Installation
 Now, you need to manually assign the `config.json` and `login.json`. Editing `developers.json` is optional, but you might want to do that as well.<br>
 The structure of the `config.json` should look like this, you must change all the REQUIRED values for the bot to work:
-```js
+```
 {
   "debug": {
     "error": "REQUIRED",
@@ -77,7 +77,7 @@ The structure of the `config.json` should look like this, you must change all th
 }
 ```
 And the same thing goes for the `login.json`:
-```js
+```
 {
   "client": {
     "presence": {
