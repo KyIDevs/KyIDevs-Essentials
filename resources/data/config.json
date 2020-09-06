@@ -1,0 +1,42 @@
+{
+  "debug": {
+    "error": "REQUIRED",
+    "chatlog": "REQUIRED"
+  },
+  "client": {
+    "supportGuild": {
+      "guildId": "OPTIONAL"
+    },
+    "info": {
+      "id": "REQUIRED",
+      "name": "KyIDevs Essentials",
+      "description": "KyIDevs's Essentials Bot for testing and management purposes"
+    },
+    "image": {
+      "blank": "https://discordapp.com/assets/322c936a8c8be1b803cd94861bdfa868.png",
+      "avatar": "REQUIRED"
+    },
+    "settings": {
+      "footer": "REQUIRED"
+    },
+    "presence": {
+      "activity": {
+        "name": "KyIDevs Essentials | )help | Starting System...",
+        "type": "PLAYING"
+      }
+    },
+    "oAuth2": {
+      "scopes": [],
+      "domain": {
+        "url": "",
+        "port": 8080
+      }
+    }
+  },
+  "admin": {
+    "owner": {
+      "id": "REQUIRED"
+    },
+    "id": []
+  }
+}

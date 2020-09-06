@@ -1,0 +1,32 @@
+{
+  "client": {
+    "presence": {
+      "activity": {
+        "name": "KyIDevs Essentials | )help | Starting System...",
+        "type": "PLAYING"
+      }
+    }
+  },
+  "mongodb": {
+    "username": "REQUIRED",
+    "password": "REQUIRED",
+    "cluster": {
+      "url": "REQUIRED",
+      "database": "REQUIRED"
+    }
+  },
+  "dbl": {
+    "password": "",
+    "port": 7070,
+    "auth": ""
+  },
+  "patreon": {
+    "id": "",
+    "secret": "",
+    "creatorAccessToken": "",
+    "creatorRefreshToken": "",
+    "port": 6060
+  },
+  "token": "REQUIRED",
+  "secret": "REQUIRED"
+}
