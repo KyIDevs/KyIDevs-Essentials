@@ -79,7 +79,7 @@ module.exports = {
       } else {
         const string = client.emoji.false + " **That's not a valid Command!**" +
           "\nType `" + client.prefix + command.id + "` to get the list of all Commands.";
-        const embed = await Essentials.constructNoticeEmbed(client, "alert", string);
+        const embed = Essentials.constructNoticeEmbed(client, "alert", string);
         message.channel.send(embed);
       }
     }
