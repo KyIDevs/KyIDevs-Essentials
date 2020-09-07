@@ -79,7 +79,7 @@ module.exports = {
     Guild.findOne({
       guildId: message.guild.id
     }, async (err, guild) => {
-      if(err) client.debugChannel.send(await Essentials.errorEmbed(err)
+      if(err) Essentials.log(client, err);
       if(!guild){
         const newDoc = new Guild({
           guildId: message.guild.id,
@@ -87,29 +87,29 @@ module.exports = {
           loggingChannelId: message.channel.id,
           levelingChannelId: message.channel.id
         })
-        newDoc.save().catch(err => client.debugChannel.send(await Essentials.errorEmbed(err)));
+        newDoc.save().catch(err => Essentials.log(client, err));
       }
       Channel.findOne({
         guildId: message.guild.id,
         channelId: message.channel.id
       }, async (err, channel) => {
-        if(err) client.debugChannel.send(await Essentials.errorEmbed(err))
+        if(err) Essentials.log(client, err);
         if(!channel){
           const newDoc2 = new Channel({
             guildId: message.guild.id,
             channelId: message.channel.id
           })
-          newDoc2.save().catch(err => client.debugChannel.send(await Essentials.errorEmbed(err)));
+          newDoc2.save().catch(err => Essentials.log(client, err));
         }
         User.findOne({
           userId: message.author.id
         }, async (err, auth) => {
-          if(err) client.debugChannel.send(await Essentials.errorEmbed(err))
+          if(err) Essentials.log(client, err)
           if(!auth){
             const newDoc3 = new User({
               userId: message.author.id
             })
-            newDoc3.save().catch(err => client.debugChannel.send(await Essentials.errorEmbed(err)));
+            newDoc3.save().catch(err => Essentials.log(client, err));
           }
           
             // Importing Commands //
@@ -145,14 +145,14 @@ module.exports = {
                   userId: message.author.id,
                   command: command.id
                 }, async (err, cooldown) => {
-                  if(err) client.debugChannel.send(await Essentials.errorEmbed(err))
+                  if(err) Essentials.log(client, err)
                   if(!cooldown){
                     const newDoc4 = new Cooldown({
                       userId: message.author.id,
                       command: command.id,
                       time: message.createdTimestamp + command.cooldown
                     })
-                    newDoc4.save().catch(err => client.debugChannel.send(await Essentials.errorEmbed(err)));
+                    newDoc4.save().catch(err => Essentials.log(client, err));
                   }
                   if (!cooldown || (cooldown.time + command.cooldown) < message.createdTimestamp ) {
                     if (cooldown) {
@@ -172,31 +172,31 @@ module.exports = {
                               client, command, message, args, auth, channel, guild
                             );
                           } catch (err) {
-                            client.debugChannel.send(await Essentials.errorEmbed(err))
+                            Essentials.log(client, err)
                           }
                         } else {
                           const string = "PermissionsError: Check if you have these permissions:\n" + command.memberPermissions.join(", ");
-                          const embed = await Essentials.constructNoticeEmbed(client, "alert", string);
+                          const embed = Essentials.constructNoticeEmbed(client, "alert", string);
                           message.channel.send(embed);
                         }
                       } else {
                         const string = "BotPermissionsError: Check if these permissions are applied to the bot:\n" + command.permissions.join(", ");
-                        const embed = await Essentials.constructNoticeEmbed(client, "alert", string);
+                        const embed = Essentials.constructNoticeEmbed(client, "alert", string);
                         message.channel.send(embed);
                       }
                     } else {
                       const string = "PermissionsError: This command is admin-only.";
-                      const embed = await Essentials.constructNoticeEmbed(client, "alert", string);
+                      const embed = Essentials.constructNoticeEmbed(client, "alert", string);
                       message.channel.send(embed);
                     }
                   } else if (cooldown && (cooldown.time + command.cooldown) > message.createdTimestamp) {
                     const time = Math.floor((cooldown.time + command.cooldown - message.createdTimestamp) / 1000);
                     alert = `${message.author.tag}, Please wait ${time} seconds before trying again!`;
-                    const embed = await Essentials.constructNoticeEmbed(client, "alert", alert);
+                    const embed = Essentials.constructNoticeEmbed(client, "alert", alert);
                     return message.channel.send(embed);
                   }
                   if (cooldown) {
-                    cooldown.save().catch(err => client.debugChannel.send(await Essentials.errorEmbed(err))
+                    cooldown.save().catch(err => Essentials.log(client, err))
                   }
                 })
               }
@@ -214,13 +214,13 @@ module.exports = {
             }
             
             if (guild) {
-              guild.save().catch(err => client.debugChannel.send(client.debugChannel.send(await Essentials.errorEmbed(err)));
+              guild.save().catch(err => Essentials.log(client, err));
             }
             if (auth) {
-              auth.save().catch(err => client.debugChannel.send(client.debugChannel.send(await Essentials.errorEmbed(err)));
+              auth.save().catch(err => Essentials.log(client, err));
             }
             if (channel) {
-              channel.save().catch(err => client.debugChannel.send(client.debugChannel.send(await Essentials.errorEmbed(err)));
+              channel.save().catch(err => Essentials.log(client, err));
             }
         })
       })
