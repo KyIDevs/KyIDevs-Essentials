@@ -117,6 +117,6 @@ module.exports = {
         `Requested by ${message.author.username}`,
         `${avtr}`
       );
-    message.channel.send(uinfoembed).catch(err => client.debugChannel.send(await Essentials.errorEmbed(err)));
+    message.channel.send(uinfoembed).catch(err => Essentials.log(err));
   }
 };
