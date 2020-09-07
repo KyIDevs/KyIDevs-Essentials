@@ -120,5 +120,6 @@ If you need further help on setting up the discord bot, you can refer to the wik
 ## Developers
 This project is maintained by [KyIDevs](https://github.com/KyIDevs) with help from:
 * Xignoqt
+
 ## Documentations
 For documentations, read the wiki [here](https://kyidevs.github.io/discord-bots/essentials/documentations).
