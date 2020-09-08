@@ -27,5 +27,6 @@
   "license": "GNU GPLv3",
   "repository": "https://github.com/KyIDevs/KyIDevs-Essentials",
   "devDependencies": {
-  }
+  },
+  "original-author": "Kayui Mineko"
 }
