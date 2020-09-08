@@ -87,6 +87,7 @@ module.exports = {
     }
   },
   placeHolder(client, string) {
+    const owner = client.cache.get(client.config.owner.id);
     if (typeof string === "string") {
       return string
         .replace(/%totalCommands%/g, client.commands.array().length)
@@ -106,11 +107,11 @@ module.exports = {
         .replace(/%clientAvatarURL%/g, client.avatar)
         .replace(/%clientRepository%/g, client.package.repository)
         .replace(/%clientAuthor%/g, client.package.author)
-        .replace(/%clientOwnerUsername%/g, client.owner.username)
-        .replace(/%clientOwnerTag%/g, client.owner.tag)
-        .replace(/%clientOwnerID%/g, client.owner.id)
+        .replace(/%clientOwnerUsername%/g, owner.username)
+        .replace(/%clientOwnerTag%/g, owner.tag)
+        .replace(/%clientOwnerID%/g, owner.id)
         .replace(/%clientMainFile%/g, client.package.main)
-        .replace(/%clientOwnerAvatarURL%/g, client.owner.avatarURL() || client.owner.defaultAvatarURL)
+        .replace(/%clientOwnerAvatarURL%/g, owner.avatarURL() || owner.defaultAvatarURL)
         .replace(/%clientOriginalAuthor%/g, client.package.original_author);
     } else {
       return string;
