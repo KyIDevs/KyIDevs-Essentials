@@ -46,6 +46,7 @@ const DBL = require('dblapi.js');
 const mongoose = require('mongoose');
 
 // Boot Resources //
+const package = require("./package.json")
 const config = require("./resources/data/config.json");
 const login = require("./resources/data/login.json");
 const dev = require("./resources/data/developers.json");
@@ -72,10 +73,18 @@ client.dev = dev;
 client.color = color;
 client.emoji = emoji;
 client.def = def;
+client.package = package;
 
 // Predefined Owner from config.json //
 const owner = client.users.cache.get(config.admin.owner.id);
 client.owner = owner;
+
+// Configuring Footers Etc.
+client.name = config.name;
+client.description = package.description;
+if (config.images.avatar) client.avatar = config.images.avatar;
+else client.avatar = client.user.avatarURL() || client.user.defaultAvatarURl;
+client.footer = Essentials.placeHolder(client, config.settings.footer)
 
 // Connecting to MongoDB Database //
 mongoose.connect(
