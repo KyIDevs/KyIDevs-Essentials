@@ -50,7 +50,7 @@ module.exports = {
     } else {
       member = mGuild.members.cache.get(args[0]);
     }
-    if (isNaN(args[1])) {
+    if (!args[1] || isNaN(args[1])) {
       const string = "Identifier <days> must be a number between 0-7!";
       const embed = Essentials.constructNoticeEmbed(client, "error", string);
       return message.channel.send(embed);
@@ -58,6 +58,11 @@ module.exports = {
     const days = parseInt(args[1]) || 0;
     if (parseInt(args[1]) > 7) int = 7;
     if (parseInt(args[1]) < 0) int = 0;
+    if (!member.banable) {
+      const string = "This member can't be banned, check if they have a higher role than the bot!";
+      const embed = Essentials.constructNoticeEmbed(client, "error", string);
+      return message.channel.send(embed);
+    }
     member.ban({
       days: int,
       reason: `Banned By: ${message.author.tag}\n` + (args.slice(2).join(" ") || "No reason was provided.")
@@ -70,7 +75,7 @@ module.exports = {
           "Member banned",
           `**${member.tag} has successfully been banned from this guild.**\n` +
           (`Banned By: ${message.author.tag}\n` +
-          (args.slice(1).join(" ") || "No reason was provided.")),
+          (args.slice(2).join(" ") || "No reason was provided.")),
           "none",
           "none",
           "${member.tag} has been banned by ${message.author.tag}",
