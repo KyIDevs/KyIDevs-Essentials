@@ -32,8 +32,8 @@ module.exports = {
   cooldown: 5000, // Command cooldown
   examples: ["help", "help eval"], // Command Examples
   usage: ["[sub-command]"], // Command Usage
-  permissions: ["SEND_MESSAGES", "READ_MESSAGES"], // Command Permissions
-  memberPermissions: ["SEND_MESSAGES", "READ_MESSAGES"], // User is required to have these permissions
+  permissions: ["SEND_MESSAGES", "READ_MESSAGE_HISTORY"], // Command Permissions
+  memberPermissions: ["SEND_MESSAGES", "READ_MESSAGE_HISTORY"], // User is required to have these permissions
   admin: false, // Command is admin only
   async execute(client, command, message, args, auth, channel, guild) { // Function async execute()
     // Command Starts Here //
