@@ -79,6 +79,28 @@ client.package = package;
 const owner = client.users.cache.get(config.admin.owner.id);
 client.owner = owner;
 
+// Load Commands //
+client.commands = new Discord.Collection();
+var commandFiles = fs
+  .readdirSync(`./resources/commands`)
+  .filter(file => file.endsWith(".js"));
+for (var file of commandFiles) {
+  var command = require(`./resources/commands/${file}`);
+  client.commands.set(command.id, command);
+  console.log(`Loading command handler for command "${command.name}".`);
+}
+
+// Load Event Handlers //
+client.events = new Discord.Collection();
+var eventFiles = fs
+  .readdirSync(`./resources/events`)
+  .filter(file => file.endsWith(".js"));
+for (var file of eventFiles) {
+  var event = require(`./resources/events/${file}`);
+  client.events.set(event.name, event);
+  console.log(`Loading event handler for event "${event.name}".`);
+}
+
 // Configuring Footers Etc.
 client.name = config.name;
 client.description = package.description;
@@ -129,28 +151,6 @@ client.on("ready", async () => {
   // Set Startup Status //
   client.user.setStatus(config.client.presence.activity.status);
 });
-
-// Load Commands //
-client.commands = new Discord.Collection();
-var commandFiles = fs
-  .readdirSync(`./resources/commands`)
-  .filter(file => file.endsWith(".js"));
-for (var file of commandFiles) {
-  var command = require(`./resources/commands/${file}`);
-  client.commands.set(command.id, command);
-  console.log(`Loading command handler for command "${command.name}".`);
-}
-
-// Load Event Handlers //
-client.events = new Discord.Collection();
-var eventFiles = fs
-  .readdirSync(`./resources/events`)
-  .filter(file => file.endsWith(".js"));
-for (var file of eventFiles) {
-  var event = require(`./resources/events/${file}`);
-  client.events.set(event.name, event);
-  console.log(`Loading event handler for event "${event.name}".`);
-}
 
 // Guild Join Event //
 client.on("guildCreate", async guild => {
