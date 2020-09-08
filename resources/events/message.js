@@ -181,7 +181,7 @@ module.exports = {
                           message.channel.send(embed);
                         }
                       } else {
-                        const string = "BotPermissionsError: Check if these permissions are applied to the bot:\n" + command.permissions.join(", ");
+                        const string = "BotPermissionsError: Check if the bot has these permissions:\n" + command.permissions.join(", ");
                         const embed = Essentials.constructNoticeEmbed(client, "alert", string);
                         message.channel.send(embed);
                       }
