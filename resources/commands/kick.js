@@ -64,11 +64,14 @@ module.exports = {
           guild.name,
           guild.IconURL() || message.author.defaultAvatarURL,
           "Member kicked",
-          `${member.id} has successfully been kicked from this guild.\n` +
-          (`Kicked By: ${message.author.tag}\n` +
-          (args.slice(1).join(" ") || "No reason was provided.")
+          `**${member.tag} has successfully been kicked from this guild.**\n` +
+          (`Banned By: ${message.author.tag}\n` +
+          (args.slice(1).join(" ") || "No reason was provided."),
+          "none",
+          "none",
+          "${member.tag} has been kicked by ${message.author.tag}",
+          true
         );
-        return message.channel.send(embed);
       })
       .catch(err => Essentials.log(client, err));
   }
