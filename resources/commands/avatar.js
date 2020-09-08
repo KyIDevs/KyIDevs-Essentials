@@ -46,8 +46,8 @@ module.exports = {
     } else {
       user = cient.users.cache.get(args[0]);
     }
-    const avtr = message.author.avatarURL() || message.author.defaultAvatarURL;
-    const uvtr = user.avatarURL() || user.defaultAvatarURL;
+    const avtr = message.author.avatarURL({format: "png", size: 1024, dynamic: true})  || message.author.defaultAvatarURL;
+    const uvtr = user.avatarURL({format: "png", size: 1024, dynamic: true})  || user.defaultAvatarURL;
     const embed = new Discord.MessageEmbed()
       .setTitle(`${user.username}'s avatar`)
       .setDescription(`[Avatar Link](${uvtr})`)
