@@ -35,7 +35,7 @@ module.exports = {
   permissions: ["SEND_MESSAGES", "READ_MESSAGES", "KICK_MEMBERS"], // Command Permissions
   memberPermissions: ["SEND_MESSAGES", "READ_MESSAGES", "KICK_MEMBERS"], // User is required to have these permissions
   admin: false, // Command is admin only
-  async execute(client, command, message, args) { // Function async execute()
+  async execute(client, command, message, args, auth, channel, guild) { // Function async execute()
     // Command Starts Here
     let member;
     const guild = message.guild;
