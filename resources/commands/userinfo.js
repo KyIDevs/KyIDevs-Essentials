@@ -57,7 +57,7 @@ module.exports = {
     else what = "User";
     var avtr = message.author.avatarURL() || message.author.defaultAvatarURL;
     var uvtr = user.avatarURL() || user.defaultAvatarURL;
-    const uinfoembed = new Discord.MessageEmbed()
+    const embed = new Discord.MessageEmbed()
       .setAuthor(user.username, uvtr)
       .setTitle(`${user.username}'s info`)
       .setThumbnail(uvtr)
@@ -87,6 +87,6 @@ module.exports = {
         `Requested by ${message.author.username}`,
         `${avtr}`
       );
-    message.channel.send(uinfoembed).catch(err => Essentials.log(client, err));
+    message.channel.send(embed).catch(err => Essentials.log(client, err));
   }
 };
