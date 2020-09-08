@@ -39,7 +39,7 @@ module.exports = {
     // Command Starts Here //
     let user, activity, what, joined, status;
     if (isNaN(args[0])) {
-      user = message.mentions.users.first() || client.users.cache.find(u => u.tag.toLowerCase().join().split('').includes(args[0].toLowerCase().join().split('')));
+      user = message.mentions.users.first() || client.users.cache.find(u => u.tag.join().toLowerCase().split('').includes(args[0].join().toLowerCase().split('')));
       if (!user) {
         user = message.author;
       }
