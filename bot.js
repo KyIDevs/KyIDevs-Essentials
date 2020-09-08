@@ -102,7 +102,7 @@ client.owner = owner;
 client.name = config.name;
 client.description = package.description;
 if (config.client.image.avatar) client.avatar = config.client.image.avatar;
-else client.avatar = client.user.avatarURL() || client.user.defaultAvatarURl;
+else client.avatar = client.user.avatarURL({format: "png", size: 1024, dynamic: true}) || client.user.defaultAvatarURl;
 
 // Connecting to MongoDB Database //
 mongoose.connect(
