@@ -82,9 +82,9 @@ client.owner = owner;
 // Configuring Footers Etc.
 client.name = config.name;
 client.description = package.description;
-if (config.image.avatar) client.avatar = config.image.avatar;
+if (config.client.image.avatar) client.avatar = config.client.image.avatar;
 else client.avatar = client.user.avatarURL() || client.user.defaultAvatarURl;
-client.footer = Essentials.placeHolder(client, config.settings.footer);
+client.footer = Essentials.placeHolder(client, config.client.settings.footer);
 
 // Connecting to MongoDB Database //
 mongoose.connect(
