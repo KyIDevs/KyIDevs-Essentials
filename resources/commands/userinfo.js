@@ -55,8 +55,8 @@ module.exports = {
     else joined = message.guild.member(user).joinedAt;
     if (user.bot) what = "Bot";
     else what = "User";
-    var avtr = message.author.avatarURL() || message.author.defaultAvatarURL
-    var uvtr = user.avatarURL() || user.defaultAvatarURL
+    var avtr = message.author.avatarURL() || message.author.defaultAvatarURL;
+    var uvtr = user.avatarURL() || user.defaultAvatarURL;
     const uinfoembed = new Discord.MessageEmbed()
       .setAuthor(`${user.username}`, `${uvtr}`)
       .setTitle(`${user.username}` + "'s info")
