@@ -26,7 +26,7 @@ const Essentials = require('../utils/essentials.js')
 module.exports = {
   id: "avatar",
   name: "Avatar", // Command name
-  description: "A simple eval tool to use on Discord.", // Command Description
+  description: "A command to show a user's avatar.", // Command Description
   aliases: ["av", "avtr"], // Command Aliases
   category: "General",
   cooldown: 10000, // Command cooldown
