@@ -50,7 +50,7 @@ module.exports = {
     } else {
       member = mGuild.members.cache.get(args[0]);
     }
-    if (member.kickable) {
+    if (!member.kickable) {
       const string = "This member can't be kicked, check if they have a higher role than the bot!";
       const embed = Essentials.constructNoticeEmbed(client, "error", string);
       return message.channel.send(embed);
