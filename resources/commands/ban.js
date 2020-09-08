@@ -68,18 +68,18 @@ module.exports = {
       days: int,
       reason: `Banned By: ${message.author.tag}\n` + (args.slice(2).join(" ") || "No reason was provided.")
     })
-      .then(() => {
+      .then(m => {
         const embed = Essentials.constructShortEmbed(
           client.color.green,
           mGuild.name,
           mGuild.iconURL() || message.author.defaultAvatarURL,
           "Member banned",
-          `**${member.tag} has successfully been banned from this guild.**\n` +
+          `**${m.tag} has successfully been banned from this guild.**\n` +
           (`Banned By: ${message.author.tag}\n` +
           (args.slice(2).join(" ") || "No reason was provided.")),
           "none",
           "none",
-          "${member.tag} has been banned by ${message.author.tag}",
+          `${m.tag} has been banned by ${message.author.tag}`,
           true
         );
         return message.channel.send(embed);
