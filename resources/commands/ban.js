@@ -57,9 +57,8 @@ module.exports = {
       const embed = Essentials.constructNoticeEmbed(client, "error", string);
       return message.channel.send(embed);
     }
-    const days = parseInt(args[1]) || 0;
     if (parseInt(args[1]) > 7) int = 7;
-    if (parseInt(args[1]) < 0) int = 0;
+    if (parseInt(args[1]) < 0 || parseInt(args[1]) === 0) int = 0;
     if (!member.bannable) {
       const string = "This member can't be banned, check if they have a higher role than the bot!";
       const embed = Essentials.constructNoticeEmbed(client, "error", string);
