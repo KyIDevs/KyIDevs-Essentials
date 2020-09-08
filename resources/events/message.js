@@ -79,7 +79,7 @@ module.exports = {
     Guild.findOne({
       guildId: message.guild.id
     }, async (err, guild) => {
-      if(err) Essentials.log(client, err);
+      if(err) Essentials.log(err);
       if(!guild){
         const newDoc = new Guild({
           guildId: message.guild.id,
@@ -87,29 +87,29 @@ module.exports = {
           loggingChannelId: message.channel.id,
           levelingChannelId: message.channel.id
         })
-        newDoc.save().catch(err => Essentials.log(client, err));
+        newDoc.save().catch(err => Essentials.log(err));
       }
       Channel.findOne({
         guildId: message.guild.id,
         channelId: message.channel.id
       }, async (err, channel) => {
-        if(err) Essentials.log(client, err);
+        if(err) Essentials.log(err);
         if(!channel){
           const newDoc2 = new Channel({
             guildId: message.guild.id,
             channelId: message.channel.id
           })
-          newDoc2.save().catch(err => Essentials.log(client, err));
+          newDoc2.save().catch(err => Essentials.log(err));
         }
         User.findOne({
           userId: message.author.id
         }, async (err, auth) => {
-          if(err) Essentials.log(client, err)
+          if(err) Essentials.log(err)
           if(!auth){
             const newDoc3 = new User({
               userId: message.author.id
             })
-            newDoc3.save().catch(err => Essentials.log(client, err));
+            newDoc3.save().catch(err => Essentials.log(err));
           }
           
             // Importing Commands //
@@ -145,14 +145,14 @@ module.exports = {
                   userId: message.author.id,
                   command: command.id
                 }, async (err, cooldown) => {
-                  if(err) Essentials.log(client, err)
+                  if(err) Essentials.log( err)
                   if(!cooldown){
                     const newDoc4 = new Cooldown({
                       userId: message.author.id,
                       command: command.id,
                       time: message.createdTimestamp + command.cooldown
                     })
-                    newDoc4.save().catch(err => Essentials.log(client, err));
+                    newDoc4.save().catch(err => Essentials.log(err));
                   }
                   if (!cooldown || (cooldown.time + command.cooldown) < message.createdTimestamp ) {
                     if (cooldown) {
@@ -172,7 +172,7 @@ module.exports = {
                               client, command, message, args, auth, channel, guild
                             );
                           } catch (err) {
-                            Essentials.log(client, err)
+                            Essentials.log(err)
                           }
                         } else {
                           const string = "PermissionsError: Check if you have these permissions:\n" + command.memberPermissions.join(", ");
@@ -196,7 +196,7 @@ module.exports = {
                     return message.channel.send(embed);
                   }
                   if (cooldown) {
-                    cooldown.save().catch(err => Essentials.log(client, err))
+                    cooldown.save().catch(err => Essentials.log(err))
                   }
                 })
               }
@@ -214,13 +214,13 @@ module.exports = {
             }
             
             if (guild) {
-              guild.save().catch(err => Essentials.log(client, err));
+              guild.save().catch(err => Essentials.log(err));
             }
             if (auth) {
-              auth.save().catch(err => Essentials.log(client, err));
+              auth.save().catch(err => Essentials.log(err));
             }
             if (channel) {
-              channel.save().catch(err => Essentials.log(client, err));
+              channel.save().catch(err => Essentials.log(err));
             }
         })
       })
