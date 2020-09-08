@@ -62,7 +62,7 @@ module.exports = {
         const embed = Essentials.constructShortEmbed(
           client.color.green,
           message.author.tag,
-          message.author.avatarURL() || message.author.displayDefaultAvatar,
+          message.author.avatarURL() || message.author.defaultAvatarURL,
           "Member banned",
           `${member.id} has successfully been kicked from this guild.\n` +
           (`Kicked By: ${message.author.tag}\n` +
