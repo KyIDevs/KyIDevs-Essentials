@@ -54,11 +54,11 @@ module.exports = {
       return embed;
     }
   },
-  async constructShortEmbed(
+  constructShortEmbed(
     color, author, authorImg, title, description, image, thumbnail
   ) {
     // Function: constructShortEmbed()
-    embed = new Discord.MessageEmbed();
+    const embed = new Discord.MessageEmbed();
 
     if (color && color !== "none") embed.setColor(color);
     if (author && author !== "none") {
@@ -108,5 +108,16 @@ module.exports = {
       .setColor([ 255, 8, 0 ])
       .setDescription('**Error**\n```xl\n' + clean(err) + '\n```');
     return embed;
+  },
+  log(client, err) {
+    if (client.config.debug.type === "message") {
+      const embed = errorEmbed(err);
+      client.debugChannel.send(embed);
+      return;
+    }
+    if (client.config.debug.type === "log") {
+      console.log(err);
+      return;
+    }
   }
 };
