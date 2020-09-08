@@ -43,7 +43,7 @@ module.exports = {
       if (typeof evaled !== "string") evaled = require("util").inspect(evaled);
       const avtr = message.author.avatarURL() || message.author.defaultAvatarURL;
       const embed = new Discord.MessageEmbed()
-        .setAuthor(client.config.client.info.name, client.config.client.image.avatar)
+        .setAuthor(client.name, client.avatar)
         .setTitle(command.name)
         .setTimestamp()
         .setColor(client.color.default)
