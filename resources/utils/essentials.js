@@ -104,7 +104,7 @@ module.exports = {
     }
   },
   errorEmbed(err) {
-    clean(err) {
+    function clean(err) {
       if (typeof err === "string") {
         return err
           .replace(/`/g, "`" + String.fromCharCode(8203))
@@ -119,7 +119,7 @@ module.exports = {
     return embed;
   },
   log(client, err) {
-    clean(err) {
+    function clean(err) {
       if (typeof err === "string") {
         return err
           .replace(/`/g, "`" + String.fromCharCode(8203))
