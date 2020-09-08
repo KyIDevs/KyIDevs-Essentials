@@ -51,9 +51,7 @@ module.exports = {
       member = mGuild.members.cache.get(args[0]);
     }
     if (!args[1]) {
-      const string = "Identifier <days> is required!";
-      const embed = Essentials.constructNoticeEmbed(client, "error", string);
-      return message.channel.send(embed);
+      args[1] = 0;
     } else if (isNan(args[1])){
       const string = "Identifier <days> must be a number between 0-7!";
       const embed = Essentials.constructNoticeEmbed(client, "error", string);
