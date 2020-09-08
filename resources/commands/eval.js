@@ -35,7 +35,7 @@ module.exports = {
   permissions: ["SEND_MESSAGES", "READ_MESSAGES"], // Command Permissions
   memberPermissions: ["SEND_MESSAGES", "READ_MESSAGES", "MANAGE_SERVER"], // User is required to have these permissions
   admin: true, // Command is admin only
-  async execute(client, command, message, args, auth, channel, guild) { // Function async execute()
+  async execute(client, command, message, args) { // Function async execute()
     // Command Starts Here
     try {
       const code = args.join(" ");
