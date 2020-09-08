@@ -60,8 +60,8 @@ const client = new Discord.Client({
   fetchAllMembers: true,
   presence: {
     activity: {
-      name: config.client.presence.activity.name,
-      type: config.client.presence.activity.type
+      name: config.client.presence.activity.onBoot.name,
+      type: config.client.presence.activity.onBoot.type
     }
   }
 });
@@ -84,7 +84,7 @@ client.name = config.name;
 client.description = package.description;
 if (config.images.avatar) client.avatar = config.images.avatar;
 else client.avatar = client.user.avatarURL() || client.user.defaultAvatarURl;
-client.footer = Essentials.placeHolder(client, config.settings.footer)
+client.footer = Essentials.placeHolder(client, config.settings.footer);
 
 // Connecting to MongoDB Database //
 mongoose.connect(
@@ -108,8 +108,8 @@ client.on("ready", async () => {
     // Set Activity every 30 seconds
     setInterval(() => {
       client.user.setActivity(
-        `KyIDevs Essentials | ess.help | ${client.users.cache.size} total users`, {
-          type: config.client.presence.activity.type
+        Essentials.placeHolder(client, config.client.presence.activity.default.name), {
+          type: config.client.presence.activity.default.name
         }
       );
     }, 30000);
@@ -119,15 +119,15 @@ client.on("ready", async () => {
   
   // Bot Ready Log //
   console.log(
-    `Logged in as ${client.user.tag}.
-    \nThere are ${client.users.cache.size} users and/or bots online.
-    \n${client.user.tag} connected to: 
-    \n ${client.guilds.cache
+    `Logged in as ${client.user.tag}.\n
+    There are ${client.users.cache.size} users and/or bots online.\n
+    ${client.user.tag} connected to:\n
+     ${client.guilds.cache
       .map(g => g.name)
       .join(", ")}`
   );
   // Set Startup Status //
-  client.user.setStatus('idle');
+  client.user.setStatus(config.client.presence.activity.status);
 });
 
 // Load Commands //
