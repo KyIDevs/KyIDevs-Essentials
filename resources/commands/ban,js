@@ -32,7 +32,7 @@ module.exports = {
   aliases: ["banmember", "banuser"], // Command Aliases
   category: "Server Management",
   cooldown: 30000, // Command cooldown
-  examples: ["ban @KyIDevs Essentials#0309", "ban 751780624704077906", "ban 751780624704077906 I don't want you here"], // Command Examples
+  examples: ["ban @KyIDevs Essentials#0309 0", "ban 751780624704077906", "ban 751780624704077906 I don't want you here"], // Command Examples
   usage: ["<target>", "<days>", "[reason]"], // Command Usage
   permissions: ["SEND_MESSAGES", "READ_MESSAGES", "BAN_MEMBERS"], // Command Permissions
   memberPermissions: ["SEND_MESSAGES", "READ_MESSAGES", "BAN_MEMBERS"], // User is required to have these permissions
@@ -53,8 +53,8 @@ module.exports = {
       member = guild.members.cache.get(args[0]);
     }
     member.ban({
-      days: args[1],
-      reason: args.slice(2).join(" ")
+      days: parseInt(args[1]),
+      reason: `Banned By: ${message.author.tag}\n` + (args.slice(2).join(" ") || "No reason was provided.")
     }).catch(err => Essentials.log(client, err));
   }
 };
