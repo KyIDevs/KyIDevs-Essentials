@@ -32,8 +32,8 @@ module.exports = {
   cooldown: 10000, // Command cooldown
   examples: ["avatar", "avatar @KyIDevs Essentials#0309", "avatar 751780624704077906"], // Command Examples
   usage: ["[args]"], // Command Usage
-  permissions: ["SEND_MESSAGES", "READ_MESSAGES"], // Command Permissions
-  memberPermissions: ["SEND_MESSAGES", "READ_MESSAGES", "MANAGE_SERVER"], // User is required to have these permissions
+  permissions: ["SEND_MESSAGES", "READ_MESSAGE_HISTORY"], // Command Permissions
+  memberPermissions: ["SEND_MESSAGES", "READ_MESSAGE_HISTORY", "MANAGE_SERVER"], // User is required to have these permissions
   admin: false, // Command is admin only
   async execute(client, command, message, args, auth, channel, guild) { // Function async execute()
     // Command Starts Here
