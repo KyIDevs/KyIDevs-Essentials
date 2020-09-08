@@ -27,13 +27,12 @@ module.exports = {
   id: "ban",
   name: "Ban", // Command name
   description: "A simple command to ban a user from a guild.\n
-    `<days>` represents the days the banned member's messages will be deleted\n
-    Set to 0 to delete none.", // Command Description
+    `<days>` represents the days the banned member's messages will be deleted (0 - 7).", // Command Description
   aliases: ["banmember", "banuser"], // Command Aliases
   category: "Server Management",
   cooldown: 30000, // Command cooldown
-  examples: ["ban @KyIDevs Essentials#0309 0", "ban 751780624704077906", "ban 751780624704077906 I don't want you here"], // Command Examples
-  usage: ["<target>", "<days>", "[reason]"], // Command Usage
+  examples: ["ban @KyIDevs Essentials#0309 7", "ban 751780624704077906 0 Go away", "ban @KyIDevs Essentials#0309"], // Command Examples
+  usage: ["<target>", "[days]", "[reason]"], // Command Usage
   permissions: ["SEND_MESSAGES", "READ_MESSAGES", "BAN_MEMBERS"], // Command Permissions
   memberPermissions: ["SEND_MESSAGES", "READ_MESSAGES", "BAN_MEMBERS"], // User is required to have these permissions
   admin: false, // Command is admin only
@@ -46,14 +45,22 @@ module.exports = {
       if (mentioned) member = mentioned;
       else {
         const string = "That's not a valid member of this guild!";
-        const embed = Essentials.constructNoticeEmbed(client, "alert", string);
+        const embed = Essentials.constructNoticeEmbed(client, "error", string);
         return message.channel.send(embed);
       }
     } else {
       member = guild.members.cache.get(args[0]);
     }
+    if (isNaN(args[1])) {
+      const string = "Identifier <days> must be a number between 0-7!";
+      const embed = Essentials.constructNoticeEmbed(client, "error", string);
+      return message.channel.send(embed);
+    }
+    const days = parseInt(args[1]) || 0
+    if (parseInt(args[1]) > 7) int = 7;
+    if (parseInt(args[1]) < 0) int = 0;
     member.ban({
-      days: parseInt(args[1]),
+      days: int,
       reason: `Banned By: ${message.author.tag}\n` + (args.slice(2).join(" ") || "No reason was provided.")
     }).catch(err => Essentials.log(client, err));
   }
