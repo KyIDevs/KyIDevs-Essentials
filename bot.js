@@ -106,7 +106,7 @@ client.on("ready", async () => {
       );
     }, 30000);
   } catch (error) {
-    client.debugChannel.send(await Essentials.errorEmbed(error));
+    Essentials.log(client, error);
   }
   
   // Bot Ready Log //
@@ -153,7 +153,7 @@ client.on("guildCreate", async guild => {
         client, event, guild
       )
     } catch (err) {
-      client.debugChannel.send(await Essentials.errorEmbed(err))
+      Essentials.log(client, err)
     }
   } 
 })
@@ -167,7 +167,7 @@ client.on("guildDelete", async guild => {
         client, event, guild
       )
     } catch (err) {
-      client.debugChannel.send(await Essentials.errorEmbed(err))
+      Essentials.log(client, err)
     }
   } 
 });
@@ -181,7 +181,7 @@ client.on('guildMemberAdd', async member => {
         client, event, member
       )
     } catch (err) {
-      client.debugChannel.send(await Essentials.errorEmbed(err))
+      Essentials.log(client, err)
     }
   } 
 });
@@ -195,7 +195,7 @@ client.on('guildMemberRemove', async member => {
         client, event, member
       )
     } catch (err) {
-      client.debugChannel.send(await Essentials.errorEmbed(err))
+      Essentials.log(client, err)
     }
   } 
 });
@@ -210,7 +210,7 @@ client.on("message", async message => {
         client, event, message
       )
     } catch (err) {
-      client.debugChannel.send(await Essentials.errorEmbed(err))
+      Essentials.log(client, err)
     }
   } 
 })
