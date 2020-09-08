@@ -20,37 +20,6 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-const mongoose = require("mongoose")
-const Profile = require("../models/profile.js");
-
-module.exports = {
-  name: "userinfo", //command name
-  async execute(client, message, args, Discord, config, avatarURL, footer, clientname, NL3Embed, DevEmbed) {
-    ///Command Starts Here
-    if (isNaN(args[0])) {
-      var user = message.mentions.users.first();
-      if (!user) {
-        var user = message.author;
-      }
-    } else {
-      var user = await client.users.fetch(args[0]);
-    }
-    Profile.findOne({
-      userID: user.id
-    }, (err, chapter) => {
-      if (err) console.log(err);
-	    if (!chapter) {
-        const newUI = new Profile({
-          userID: user.id,
-          username: user.username
-        })
-        return newUI.save().catch(err => console.log(err))
-	    } else {
-        
-      }
-    })
-  }
-}
 const Discord = require('discord.js');
 const Essentials = require('../utils/essentials.js')
 
@@ -74,19 +43,11 @@ module.exports = {
     else var status = user.presence.status;
     if (message.guild.member(user) === undefined || message.guild.member(user) === null || !message.guild.member(user)) var joined = "User is not on the Server.";
     else var joined = message.guild.member(user).joinedAt;
-    if (user.bot) {
-      var what = "Bot";
-    } else {
-      var what = "User";
-    }
-    var avtr = message.author.avatarURL();
-    if (avtr) {
-      var avtr = client.config.client.image.blank;
-    }
-    var uvtr = user.avatarURL();
-    if (uvtr) {
-      var avtr = client.config.client.image.blank;
-    }
+    let what;
+    if (user.bot) what = "Bot";
+    else what = "User";
+    var avtr = message.author.avatarURL() || client.config.client.image.blank;
+    var uvtr = user.avatarURL() || client.config.client.image.blank;
     const uinfoembed = new Discord.MessageEmbed()
       .setAuthor(`${user.username}`, `${uvtr}`)
       .setTitle(`${user.username}` + "'s info")
@@ -117,6 +78,6 @@ module.exports = {
         `Requested by ${message.author.username}`,
         `${avtr}`
       );
-    message.channel.send(uinfoembed).catch(err => Essentials.log(err));
+    message.channel.send(uinfoembed).catch(err => Essentials.log(client, err));
   }
 };
