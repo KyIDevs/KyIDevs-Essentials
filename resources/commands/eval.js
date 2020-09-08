@@ -41,17 +41,18 @@ module.exports = {
       const code = args.join(" ");
       let evaled = eval(args.join(" "));
       if (typeof evaled !== "string") evaled = require("util").inspect(evaled);
+      const avtr = message.author.avatarURL() || message.author.defaultAvatarURL;
       const embed = new Discord.MessageEmbed()
         .setAuthor(client.config.client.info.name, client.config.client.image.avatar)
         .setTitle(command.name)
         .setTimestamp()
         .setColor(client.color.default)
         .addField("**Input**",  '```' + args.join(" ") + '```')
-        .addField("**Result**", '```' + await Essentials.clean(evaled) + '```')
-        .setFooter(`${message.author.username} evaled`, message.author.avatarURL());
+        .addField("**Result**", '```' + ssentials.clean(evaled) + '```')
+        .setFooter(`${message.author.username} evaled`, avtr);
       message.channel.send(embed);
     } catch (err) {
-      const embed = await Essentials.errorEmbed(err);
+      const embed = Essentials.errorEmbed(err);
       message.channel.send(embed);
     }
   }
