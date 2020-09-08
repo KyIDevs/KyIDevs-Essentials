@@ -104,12 +104,30 @@ module.exports = {
     }
   },
   errorEmbed(err) {
+    clean(err) {
+      if (typeof err === "string") {
+        return err
+          .replace(/`/g, "`" + String.fromCharCode(8203))
+          .replace(/@/g, "@" + String.fromCharCode(8203));
+      } else {
+        return err;
+      }
+    }
     const embed = new Discord.MessageEmbed()
       .setColor([ 255, 8, 0 ])
       .setDescription('**Error**\n```xl\n' + clean(err) + '\n```');
     return embed;
   },
   log(client, err) {
+    clean(err) {
+      if (typeof err === "string") {
+        return err
+          .replace(/`/g, "`" + String.fromCharCode(8203))
+          .replace(/@/g, "@" + String.fromCharCode(8203));
+      } else {
+        return err;
+      }
+    }
     if (client.config.debug.type === "message") {
       const embed = new Discord.MessageEmbed()
         .setColor([ 255, 8, 0 ])
