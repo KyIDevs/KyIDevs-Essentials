@@ -62,7 +62,7 @@ module.exports = {
       if (subcommand) {
         let usage;
         if (subcommand.usage.length) usage = "`" + client.prefix + subcommand.id + "` `" + subcommand.usage.join("` `") + "`";
-        else usage = "`" + client.prefix + subcommand.id;
+        else usage = "`" + client.prefix + subcommand.id + "`";
         const embed = new Discord.MessageEmbed()
           .setTitle(`**${subcommand.name}**`)
           .setAuthor(client.name, client.avatar)
