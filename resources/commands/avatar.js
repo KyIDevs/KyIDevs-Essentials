@@ -48,7 +48,7 @@ module.exports = {
     }
     const avtr = message.author.avatarURL() || message.author.defaultAvatarURL;
     const uvtr = user.avatarURL() || user.defaultAvatarURL;
-    const uinfoembed = new Discord.MessageEmbed()
+    const embed = new Discord.MessageEmbed()
       .setTitle(`${user.username}'s avatar`)
       .setDescription(`[Avatar Link](${uvtr})`)
       .setImage(uvtr)
@@ -58,5 +58,6 @@ module.exports = {
         `Requested by ${message.author.username}`,
         `${avtr}`
       );
+    message.channel.send(embed)
   }
 };
