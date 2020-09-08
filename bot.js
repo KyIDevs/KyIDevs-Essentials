@@ -66,7 +66,7 @@ const client = new Discord.Client({
   }
 });
 
-// Resources //
+// Global `client` variable resources //
 client.config = config;
 client.logins = login;
 client.dev = dev;
@@ -74,10 +74,6 @@ client.color = color;
 client.emoji = emoji;
 client.def = def;
 client.package = package;
-
-// Predefined Owner from config.json //
-const owner = client.users.cache.get(config.admin.owner.id);
-client.owner = owner;
 
 // Load Commands //
 client.commands = new Discord.Collection();
@@ -100,13 +96,13 @@ for (var file of eventFiles) {
   client.events.set(event.name, event);
   console.log(`Loading event handler for event "${event.name}".`);
 }
-
-// Configuring Footers Etc.
+// Getting other global `client` variables //
+const owner = client.users.cache.get(config.admin.owner.id);
+client.owner = owner;
 client.name = config.name;
 client.description = package.description;
 if (config.client.image.avatar) client.avatar = config.client.image.avatar;
 else client.avatar = client.user.avatarURL() || client.user.defaultAvatarURl;
-client.footer = Essentials.placeHolder(client, config.client.settings.footer);
 
 // Connecting to MongoDB Database //
 mongoose.connect(
@@ -126,6 +122,7 @@ mongoose.connect(
 
 // Event Emitted: Ready //
 client.on("ready", async () => {
+  client.footer = Essentials.placeHolder(client, config.client.settings.footer);
   try {
     // Set Activity every 30 seconds
     setInterval(() => {
