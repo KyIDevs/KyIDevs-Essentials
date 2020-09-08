@@ -48,7 +48,7 @@ module.exports = {
         .setTimestamp()
         .setColor(client.color.default)
         .addField("**Input**",  '```' + args.join(" ") + '```')
-        .addField("**Result**", '```' + ssentials.clean(evaled) + '```')
+        .addField("**Result**", '```' + Essentials.clean(evaled) + '```')
         .setFooter(`${message.author.username} evaled`, avtr);
       message.channel.send(embed);
     } catch (err) {
