@@ -36,7 +36,7 @@ module.exports = {
     // Can be Online, Idle, DND //
     // or Invisible.            //
     //////////////////////////////
-    client.user.setStatus('idle');
+    client.user.setStatus(client.config.client.presence.activity.status);
 
     // Disallows self trigger //
     if (message.author === client.user) return
@@ -54,12 +54,12 @@ module.exports = {
     
     const debug = true;
     if (debug) {
-      const avtr = message.author.avatarURL() || config.client.image.blank;
-      const guild = await client.guilds.cache.get(client.config.client.supportGuild.guildId);
-      const chnl = await guild.channels.cache.get(client.config.debug.chatlog);
+      const avtr = message.author.avatarURL() || message.author.defaultAvatarURL;
+      const chnl = client.channels.cache.get(client.config.debug.chatlog);
+      if (!chnl) return Essentials.log(client, "TypeError: The channel `chnl` doesn't exist or the bot isn't in the guild it's in!")
       if (message.content) {
         const embed = new Discord.MessageEmbed()
-          .setAuthor(client.config.client.info.name, client.config.client.image.avatar)
+          .setAuthor(client.name, client.avatar)
           .setColor(client.color.purple)
           .setThumbnail(avtr)
           .addFields(
@@ -71,6 +71,7 @@ module.exports = {
             { name: "Guild", value: message.guild.name, inline: true },
             { name: "Channel", value: message.channel.name, inline: true }
           )
+          .setFooter(client.footer)
         chnl.send({ embed: embed });
       }
     }
@@ -206,10 +207,10 @@ module.exports = {
               guild.prefix !== ")"
             ) {
               const Prefix = new Discord.MessageEmbed()
-                .setAuthor(client.config.client.info.name, client.config.client.image.avatar)
+                .setAuthor(client.name, client.avatar)
                 .setColor(client.color.default)
-                .setDescription("The Server's Current Prefix is " + guild.prefix)
-                .setFooter(client.config.client.settings.footer, client.config.client.image.avatar);
+                .setDescription("The Server's Current Prefix is " + client.prefix)
+                .setFooter(client.footer, client.avatar);
               message.author.send(Prefix);
             }
             
