@@ -22,7 +22,7 @@
     "presence": {
       "activity": {
         "onBoot": {
-          "name": "%clientName% | %clientDefaultPrefix%help | Starting System...",
+          "name": "KyIDevs Essentials | ess.help | Starting System...",
           "type": "PLAYING"
         },
         "default": {
