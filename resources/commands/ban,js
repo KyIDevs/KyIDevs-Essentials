@@ -62,6 +62,23 @@ module.exports = {
     member.ban({
       days: int,
       reason: `Banned By: ${message.author.tag}\n` + (args.slice(2).join(" ") || "No reason was provided.")
-    }).catch(err => Essentials.log(client, err));
+    })
+      .then(() => {
+        const embed = Essentials.constructShortEmbed(
+          client.color.green,
+          message.author.tag,
+          message.author.avatarURL() || message.author.displayDefaultAvatar,
+          "Member banned",
+          `**${member.tag} has successfully been banned from this guild.**\n` +
+          (`Banned By: ${message.author.tag}\n` +
+          (args.slice(1).join(" ") || "No reason was provided."),
+          "none",
+          "none",
+          "${member.tag} has been banned by ${message.author.tag}",
+          true
+        );
+        return message.channel.send(embed);
+      })
+      .catch(err => Essentials.log(client, err));
   }
 };
