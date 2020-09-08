@@ -24,7 +24,7 @@ const Discord = require("discord.js")
 
 module.exports = {
   name: "Essentials", // Module Name
-  async constructNoticeEmbed(
+  constructNoticeEmbed(
     client, type, string
   ) {
     // Function: constructNoticeEmbed()
@@ -58,7 +58,7 @@ module.exports = {
     color, author, authorImg, title, description, image, thumbnail
   ) {
     // Function: constructShortEmbed()
-    const embed = new Discord.MessageEmbed();
+    embed = new Discord.MessageEmbed();
 
     if (color && color !== "none") embed.setColor(color);
     if (author && author !== "none") {
@@ -75,7 +75,7 @@ module.exports = {
 
     return embed;
   },
-  async clean (text) {
+  clean (text) {
     if (typeof text === "string") {
       return text
         .replace(/`/g, "`" + String.fromCharCode(8203))
@@ -84,7 +84,7 @@ module.exports = {
       return text;
     }
   },
-  async placeHolder(client, string) {
+  placeHolder(client, string) {
     if (typeof string === "string") {
       return string
         .replace(/%totalCommands%/gi, client.commands.array().length)
@@ -103,10 +103,10 @@ module.exports = {
       return string;
     }
   },
-  async errorEmbed(err) {
+  errorEmbed(err) {
     const embed = new Discord.MessageEmbed()
       .setColor([ 255, 8, 0 ])
-      .setDescription('**Error**\n```xl\n' + await clean(err) + '\n```');
+      .setDescription('**Error**\n```xl\n' + clean(err) + '\n```');
     return embed;
   }
 };
