@@ -37,17 +37,25 @@ module.exports = {
   admin: false, // Command is admin only
   async execute(client, command, message, args, auth, channel, guild) { // Function async execute()
     // Command Starts Here //
-    if (user.presence.activities[0] === undefined || !user.presence.activities[0]) var activity = "**No Activity**";
-    else var activity = user.presence.activities[0].state;
-    if (user.presence.status === "dnd") var status = "Do Not Disturb";
-    else var status = user.presence.status;
-    if (message.guild.member(user) === undefined || message.guild.member(user) === null || !message.guild.member(user)) var joined = "User is not on the Server.";
-    else var joined = message.guild.member(user).joinedAt;
-    let what;
+    let user, activity, what, joined, status;
+    if (isNaN(args[0])) {
+      user = message.mentions.users.first() || client.users.cache.find(u => u.tag.toLowerCase().join().split('').includes(args[0].toLowerCase().join().split('')));
+      if (!user) {
+        user = message.author;
+      }
+    } else {
+      user = cient.users.cache.get(args[0]);
+    }
+    if (user.presence.activities[0] === undefined || !user.presence.activities[0]) activity = "**No Activity**";
+    else activity = user.presence.activities[0].state;
+    if (user.presence.status === "dnd") status = "Do Not Disturb";
+    else status = user.presence.status;
+    if (message.guild.member(user) === undefined || message.guild.member(user) === null || !message.guild.member(user)) joined = "User is not on the Server.";
+    else joined = message.guild.member(user).joinedAt;
     if (user.bot) what = "Bot";
     else what = "User";
-    var avtr = message.author.avatarURL() || client.config.client.image.blank;
-    var uvtr = user.avatarURL() || client.config.client.image.blank;
+    var avtr = message.author.avatarURL() || message.author.defaultAvatarURL
+    var uvtr = user.avatarURL() || user.defaultAvatarURL
     const uinfoembed = new Discord.MessageEmbed()
       .setAuthor(`${user.username}`, `${uvtr}`)
       .setTitle(`${user.username}` + "'s info")
