@@ -38,7 +38,7 @@ module.exports = {
   async execute(client, command, message, args, auth, channel, guild) { // Function async execute()
     // Command Starts Here
     let member;
-    const guild = message.guild;
+    const mGuild = message.guild;
     const mentioned = message.mentions.members.first();
     if (isNaN(args[0])) {
       if (mentioned) member = mentioned;
@@ -48,7 +48,7 @@ module.exports = {
         return message.channel.send(embed);
       }
     } else {
-      member = guild.members.cache.get(args[0]);
+      member = mGuild.members.cache.get(args[0]);
     }
     if (member.kickable) {
       const string = "This member can't be kicked, check if they have a higher role than the bot!";
@@ -61,8 +61,8 @@ module.exports = {
       .then(() => {
         const embed = Essentials.constructShortEmbed(
           client.color.green,
-          guild.name,
-          guild.IconURL() || message.author.defaultAvatarURL,
+          mGuild.name,
+          mGuild.IconURL() || message.author.defaultAvatarURL,
           "Member kicked",
           `**${member.tag} has successfully been kicked from this guild.**\n` +
           (`Banned By: ${message.author.tag}\n` +
