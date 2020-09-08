@@ -90,17 +90,28 @@ module.exports = {
     if (typeof string === "string") {
       return string
         .replace(/%totalCommands%/g, client.commands.array().length)
-        .replace(/%clientName%/g, client.config.client.info.name)
+        .replace(/%clientName%/g, client.name)
         .replace(/%clientId%/g, client.user.id)
-        .replace(/%clientDescription/g, client.config.client.info.description)
+        .replace(/%clientDescription/g, client.package.description)
         .replace(/%clientUsername%/g, client.user.username)
-        .replace(/%clientTag%/g, client.user.username)
+        .replace(/%clientTag%/g, client.user.tag)
         .replace(/%clientDevName%/g, client.dev.name)
         .replace(/%clientDevHelpers%/g, client.dev.helpers.join(", "))
         .replace(/%clientDefaultPrefix%/g, client.def.prefix)
         .replace(/%clientGuildCount%/g, client.guilds.cache.size)
         .replace(/%clientChannelCount%/g, client.channels.cache.size)
-        .replace(/%clientUserCount%/g, client.users.cache.size);
+        .replace(/%clientPackageName%/g, client.package.name)
+        .replace(/%clientVersion%/g, client.package.version)
+        .replace(/%clientLicense%/g, client.package.license)
+        .replace(/%clientAvatarURL%/g, client.avatar)
+        .replace(/%clientRepository%/g, client.package.repository)
+        .replace(/%clientAuthor%/g, client.package.author)
+        .replace(/%clientOwnerUsername%/g, client.owner.username)
+        .replace(/%clientOwnerTag%/g, client.owner.tag)
+        .replace(/%clientOwnerID%/g, client.owner.id)
+        .replace(/%clientMainFile%/g, client.package.main)
+        .replace(/%clientOwnerAvatarURL%/g, client.owner.avatarURL() || client.owner.defaultAvatarURL)
+        .replace(/%clientOriginalAuthor%/g, client.package.original_author);
     } else {
       return string;
     }
