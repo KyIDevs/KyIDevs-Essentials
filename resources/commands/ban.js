@@ -51,7 +51,7 @@ module.exports = {
       member = mGuild.members.cache.get(args[0]);
     }
     if (!args[1]) {
-      args[1] = 0;
+      int = 0;
     } else if (isNaN(args[1])){
       const string = "Identifier <days> must be a number between 0-7!";
       const embed = Essentials.constructNoticeEmbed(client, "error", string);
@@ -74,12 +74,12 @@ module.exports = {
           mGuild.name,
           mGuild.iconURL() || message.author.defaultAvatarURL,
           "Member banned",
-          `**${m.tag} has successfully been banned from this guild.**\n` +
+          `**${m.user.tag} has successfully been banned from this guild.**\n` +
           (`Banned By: ${message.author.tag}\n` +
           (args.slice(2).join(" ") || "No reason was provided.")),
           "none",
           "none",
-          `${m.tag} has been banned by ${message.author.tag}`,
+          `${m.user.tag} has been banned by ${message.author.tag}`,
           true
         );
         return message.channel.send(embed);
