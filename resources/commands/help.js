@@ -43,15 +43,17 @@ module.exports = {
     if (!subcmd) {
       const embed = new Discord.MessageEmbed()
         .setTitle("**Command List**")
-        .setAuthor(client.config.client.info.name, client.config.client.image.avatar)
+        .setAuthor(client.name, client.avatar)
         .setColor(client.color.default)
         .setDescription(
           "Use `" + client.prefix + command.id + "` `[sub-command]` to get detailed info."
         )
-        .setFooter(client.config.client.settings.footer, client.config.client.image.avatar)
+        .setFooter(client.footer, client.avatar)
       const general = "`" + client.commands.filter(f => f.category === "General").map(e => `${e.id}`).join("`, `") + "`";
       const utilities = "`" + client.commands.filter(f => f.category === "Utilities").map(e => `${e.id}`).join("`, `") + "`";
+      const servmngmt = "`" + client.commands.filter(f => f.category === "Utilities").map(e => `${e.id}`).join("`, `") + "`";
       if (general) embed.addField("🍪 **| General**", general)
+      if (servmngmt) embed.addField("⚙️ **| Server Managements**", servmngmt)
       if (utilities) embed.addField("🛠️ **| Utilities**", utilities)
       message.channel.send(embed);
     } else {
@@ -63,16 +65,16 @@ module.exports = {
         else usage = "`" + client.prefix + subcommand.id;
         const embed = new Discord.MessageEmbed()
           .setTitle(`**${subcommand.name}**`)
-          .setAuthor(client.config.client.info.name, client.config.client.image.avatar)
+          .setAuthor(client.name, client.avatar)
           .setColor(client.color.default)
           .addField("**Category**", subcommand.category, true)
           .addField("**Aliases**", '`' + subcommand.aliases.join("`, `") + '`', true)
           .addField("**Cooldown**", `${subcommand.cooldown / 1000} seconds`, true)
           .addField("**Usage**", usage)
-          .addField("**Examples**", '`' + subcommand.examples.join("`, `") + '`')
+          .addField("**Examples**", '`' + subcommand.examples.join("`\n`") + '`')
           .addField("**Permissions**", '`' + subcommand.permissions.join("`, `") + '`')
           .addField("**User Required Permissions**", '`' + subcommand.memberPermissions.join("`, `") + '`')
-          .setFooter(client.config.client.settings.footer, client.config.client.image.avatar);
+          .setFooter(client.footer, client.avatar);
         if (subcommand.admin) embed.setDescription(subcommand.description + "\n**This command is admin-only.**");
         else embed.setDescription(subcommand.description);
         message.channel.send(embed);
