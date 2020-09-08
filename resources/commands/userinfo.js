@@ -58,18 +58,18 @@ module.exports = {
     var avtr = message.author.avatarURL() || message.author.defaultAvatarURL;
     var uvtr = user.avatarURL() || user.defaultAvatarURL;
     const uinfoembed = new Discord.MessageEmbed()
-      .setAuthor(`${user.username}`, `${uvtr}`)
-      .setTitle(`${user.username}` + "'s info")
-      .setThumbnail(`${uvtr}`)
+      .setAuthor(user.username, uvtr)
+      .setTitle(`${user.username}'s info`)
+      .setThumbnail(uvtr)
       .setColor(client.color.default)
       .addField(
         "**Basic Info**",
-        "Showing " + `${user.username}` + "'s basic information."
+        `Showing ${user.username}'s basic information.`
       )
       .addFields(
-        { name: "User Tag", value: `${user.tag}`, inline: true },
-        { name: "User Discriminator", value: `${user.discriminator}`, inline: true },
-        { name: "User ID", value: `${user.id}`, inline: true }
+        { name: "User Tag", value: user.tag, inline: true },
+        { name: "User Discriminator", value: user.discriminator, inline: true },
+        { name: "User ID", value: user.id, inline: true }
       )
       .addFields(
         { name: "User Presence", value: `**${status}**`, inline: true },
@@ -77,11 +77,11 @@ module.exports = {
         { name: "Is a", value: `**${what}**`, inline: true }
       )
       .addFields(
-        { name: "Created On", value: `${user.createdAt}`, inline: true },
-        { name: "Joined On", value: `${joined}`, inline: true },
+        { name: "Created On", value: user.createdAt, inline: true },
+        { name: "Joined On", value: joined, inline: true },
         { name: "Requested from", value: `**${message.guild.name}**`, inline: true }
       )
-      .addField("User Activity", `${activity}`)
+      .addField("User Activity", activity)
       .setTimestamp()
       .setFooter(
         `Requested by ${message.author.username}`,
