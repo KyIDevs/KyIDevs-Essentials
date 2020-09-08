@@ -37,6 +37,7 @@ The structure of the `config.json` should look like this, you must change all th
 ```js
 {
   "debug": {
+    "type": "message"
     "error": "REQUIRED",
     "chatlog": "REQUIRED"
   },
