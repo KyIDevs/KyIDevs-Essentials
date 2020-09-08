@@ -99,7 +99,7 @@ for (var file of eventFiles) {
 // Getting other global `client` variables //
 const owner = client.users.cache.get(config.admin.owner.id);
 client.owner = owner;
-client.name = config.name;
+client.name = config.client.info.name;
 client.description = package.description;
 if (config.client.image.avatar) client.avatar = config.client.image.avatar;
 else client.avatar = client.user.avatarURL({format: "png", size: 1024, dynamic: true}) || client.user.defaultAvatarURl;
