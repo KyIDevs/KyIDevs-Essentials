@@ -113,7 +113,7 @@ module.exports = {
           }
           
             // Importing Commands //
-            const avtr = message.author.avatarURL() || config.client.image.blank;
+            const avtr = message.author.avatarURL() || message.author.defaultAvatarURL
 
             if (!guild) {
               client.prefix = client.def.prefix;
