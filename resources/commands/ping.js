@@ -37,19 +37,16 @@ module.exports = {
   admin: false, // Command is admin only
   async execute(client, command, message, args, auth, channel, guild) { // Function async execute()
     // Command Starts Here //
-    var avtr = message.author.avatarURL()
-    if (!message.author.avatarURL()) {
-      var avtr = client.config.client.image.blank
-    }
+    var avtr = message.author.avatarURL() || message.author.defaultAvatarURL;
     const eembed = new Discord.MessageEmbed()
-      .setAuthor(client.config.client.info.name, client.config.client.image.avatar)
+      .setAuthor(client.name, client.avatar)
       .setColor(client.color.yellow)
       .setDescription("**Pinging...**")
       .setTimestamp()
-      .setFooter(client.config.client.settings.footer , client.config.client.image.avatar);
+      .setFooter(client.footer , client.avatar);
     const msg = await message.channel.send(eembed);
     const embed = new Discord.MessageEmbed()
-      .setAuthor(client.config.client.info.name, client.config.client.image.avatar)
+      .setAuthor(client.name, client.avatar)
       .setColor(client.color.default)
       .setTitle("Ping Result")
       .addFields(
