@@ -64,12 +64,12 @@ module.exports = {
           mGuild.name,
           mGuild.iconURL() || message.author.defaultAvatarURL,
           "Member kicked",
-          `**${m.tag} has successfully been kicked from this guild.**\n` +
+          `**${m.user.tag} has successfully been kicked from this guild.**\n` +
           (`Banned By: ${message.author.tag}\n` +
           (args.slice(1).join(" ") || "No reason was provided.")),
           "none",
           "none",
-          `${m.tag} has been kicked by ${message.author.tag}`,
+          `${m.user.tag} has been kicked by ${message.author.tag}`,
           true
         );
       })
