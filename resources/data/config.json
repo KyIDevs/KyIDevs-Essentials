@@ -10,20 +10,25 @@
     },
     "info": {
       "id": "REQUIRED",
-      "name": "KyIDevs Essentials",
-      "description": "KyIDevs's Essentials Bot for testing and management purposes"
+      "name": "KyIDevs Essentials"
     },
     "image": {
       "blank": "https://discordapp.com/assets/322c936a8c8be1b803cd94861bdfa868.png",
       "avatar": "REQUIRED"
     },
     "settings": {
-      "footer": "REQUIRED"
+      "footer": "©%clientDevName% ©%clientName% Project™ | %clientVersion% | %totalCommands% Commands Loaded"
     },
     "presence": {
       "activity": {
-        "name": "KyIDevs Essentials | )help | Starting System...",
-        "type": "PLAYING"
+        "onBoot": {
+          "name": "%clientName% | %clientDefaultPrefix%help | Starting System...",
+          "type": "PLAYING"
+        },
+        "default": {
+          "name": "%clientName% | %clientDefaultPrefix%help | %clientGuildCount% guilds",
+          "type": "PLAYING"
+        }
       }
     },
     "oAuth2": {
