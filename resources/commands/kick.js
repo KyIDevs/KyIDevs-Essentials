@@ -32,8 +32,8 @@ module.exports = {
   cooldown: 30000, // Command cooldown
   examples: ["kick @KyIDevs Essentials#0309", "kick 751780624704077906 Go away!"], // Command Examples
   usage: ["<target>", "[reason]"], // Command Usage
-  permissions: ["SEND_MESSAGES", "READ_MESSAGES", "KICK_MEMBERS"], // Command Permissions
-  memberPermissions: ["SEND_MESSAGES", "READ_MESSAGES", "KICK_MEMBERS"], // User is required to have these permissions
+  permissions: ["SEND_MESSAGES", "READ_MESSAGE_HISTORY", "KICK_MEMBERS"], // Command Permissions
+  memberPermissions: ["SEND_MESSAGES", "READ_MESSAGE_HISTORY", "KICK_MEMBERS"], // User is required to have these permissions
   admin: false, // Command is admin only
   async execute(client, command, message, args, auth, channel, guild) { // Function async execute()
     // Command Starts Here
