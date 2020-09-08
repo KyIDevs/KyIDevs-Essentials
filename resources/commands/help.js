@@ -51,7 +51,7 @@ module.exports = {
         .setFooter(client.footer, client.avatar)
       const general = "`" + client.commands.filter(f => f.category === "General").map(e => `${e.id}`).join("`, `") + "`";
       const utilities = "`" + client.commands.filter(f => f.category === "Utilities").map(e => `${e.id}`).join("`, `") + "`";
-      const servmngmt = "`" + client.commands.filter(f => f.category === "Utilities").map(e => `${e.id}`).join("`, `") + "`";
+      const servmngmt = "`" + client.commands.filter(f => f.category === "Server Management").map(e => `${e.id}`).join("`, `") + "`";
       if (general) embed.addField("🍪 **| General**", general)
       if (servmngmt) embed.addField("⚙️ **| Server Managements**", servmngmt)
       if (utilities) embed.addField("🛠️ **| Utilities**", utilities)
