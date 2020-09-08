@@ -132,7 +132,8 @@ module.exports = {
       const embed = new Discord.MessageEmbed()
         .setColor([ 255, 8, 0 ])
         .setDescription('**Error**\n```xl\n' + clean(err) + '\n```');
-      client.debugChannel.send(embed);
+      client.channels.cache.get(client.config.debug.error)
+        .send(embed);
       return;
     }
     if (client.config.debug.type === "log") {
