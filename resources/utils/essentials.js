@@ -87,7 +87,7 @@ module.exports = {
     }
   },
   placeHolder(client, string) {
-    const owner = client.cache.get(client.config.owner.id);
+    const owner = client.users.cache.get(client.config.owner.id);
     if (typeof string === "string") {
       return string
         .replace(/%totalCommands%/g, client.commands.array().length)
