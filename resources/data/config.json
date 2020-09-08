@@ -1,6 +1,6 @@
 {
   "debug": {
-    "type": "text",
+    "type": "message",
     "error": "REQUIRED",
     "chatlog": "REQUIRED"
   },
