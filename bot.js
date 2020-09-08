@@ -72,7 +72,7 @@ client.dev = dev;
 client.color = color;
 client.emoji = emoji;
 client.def = def;
-client.debugChannel = config.debug.error;
+client.debugChannel = client.channels.cache.get(config.debug.error);
 
 // Predefined Owner from config.json //
 const owner = client.users.cache.get(config.admin.owner.id);
