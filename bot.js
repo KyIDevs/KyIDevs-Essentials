@@ -82,7 +82,7 @@ client.owner = owner;
 // Configuring Footers Etc.
 client.name = config.name;
 client.description = package.description;
-if (config.images.avatar) client.avatar = config.images.avatar;
+if (config.image.avatar) client.avatar = config.image.avatar;
 else client.avatar = client.user.avatarURL() || client.user.defaultAvatarURl;
 client.footer = Essentials.placeHolder(client, config.settings.footer);
 
