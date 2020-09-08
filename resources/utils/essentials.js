@@ -55,7 +55,7 @@ module.exports = {
     }
   },
   constructShortEmbed(
-    color, author, authorImg, title, description, image, thumbnail
+    color, author, authorImg, title, description, image, thumbnail, footer, timestamp
   ) {
     // Function: constructShortEmbed()
     const embed = new Discord.MessageEmbed();
@@ -72,6 +72,8 @@ module.exports = {
     if (description && description !== "none") embed.setDescription(description);
     if (image && image !== "none") embed.setImage(image);
     if (thumbnail && thumbnail !== "none") embed.setThumbnail(thumbnail);
+    if (footer && footer !== "none") embed.setFooter(footer);
+    if (timestamp) embed.setTimestamp();
 
     return embed;
   },
