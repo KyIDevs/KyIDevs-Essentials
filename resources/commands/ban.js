@@ -75,7 +75,7 @@ module.exports = {
           mGuild.iconURL() || message.author.defaultAvatarURL,
           "Member banned",
           `**${m.user.tag} has successfully been banned from this guild.**\n` +
-          (`Banned By: ${message.author.tag}\n` +
+          (`Banned By: ${message.author.tag}\nReason: ` +
           (args.slice(2).join(" ") || "No reason was provided.")),
           "none",
           "none",
