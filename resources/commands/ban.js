@@ -26,8 +26,7 @@ const Essentials = require('../utils/essentials.js')
 module.exports = {
   id: "ban",
   name: "Ban", // Command name
-  description: "A simple command to ban a user from a guild.\n
-    `<days>` represents the days the banned member's messages will be deleted (0 - 7).", // Command Description
+  description: "A simple command to ban a user from a guild.\n`<days>` represents the days the banned member's messages will be deleted (0 - 7).", // Command Description
   aliases: ["banmember", "banuser"], // Command Aliases
   category: "Server Management",
   cooldown: 30000, // Command cooldown
@@ -56,7 +55,7 @@ module.exports = {
       const embed = Essentials.constructNoticeEmbed(client, "error", string);
       return message.channel.send(embed);
     }
-    const days = parseInt(args[1]) || 0
+    const days = parseInt(args[1]) || 0;
     if (parseInt(args[1]) > 7) int = 7;
     if (parseInt(args[1]) < 0) int = 0;
     member.ban({
@@ -71,7 +70,7 @@ module.exports = {
           "Member banned",
           `**${member.tag} has successfully been banned from this guild.**\n` +
           (`Banned By: ${message.author.tag}\n` +
-          (args.slice(1).join(" ") || "No reason was provided."),
+          (args.slice(1).join(" ") || "No reason was provided.")),
           "none",
           "none",
           "${member.tag} has been banned by ${message.author.tag}",
