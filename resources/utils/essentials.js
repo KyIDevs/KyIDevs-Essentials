@@ -89,18 +89,18 @@ module.exports = {
   placeHolder(client, string) {
     if (typeof string === "string") {
       return string
-        .replace(/%totalCommands%/gi, client.commands.array().length)
-        .replace(/%clientName%/gi, client.config.client.info.name)
-        .replace(/%clientId%/gi, client.user.id)
-        .replace(/%clientDescription/gi, client.config.client.info.description)
-        .replace(/%clientUsername%/gi, client.user.username)
-        .replace(/%clientTag%/gi, client.user.username)
-        .replace(/%clientDevName%/gi, client.dev.name)
-        .replace(/%clientDevHelpers%/gi, client.dev.helpers.join(", "))
-        .replace(/%clientDefaultPrefix%/gi, client.def.prefix)
-        .replace(/%clientGuildCount%/gi, client.guilds.cache.size)
-        .replace(/%clientChannelCount%/gi, client.channels.cache.size)
-        .replace(/%clientUserCount%/gi, client.users.cache.size);
+        .replace(/%totalCommands%/g, client.commands.array().length)
+        .replace(/%clientName%/g, client.config.client.info.name)
+        .replace(/%clientId%/g, client.user.id)
+        .replace(/%clientDescription/g, client.config.client.info.description)
+        .replace(/%clientUsername%/g, client.user.username)
+        .replace(/%clientTag%/g, client.user.username)
+        .replace(/%clientDevName%/g, client.dev.name)
+        .replace(/%clientDevHelpers%/g, client.dev.helpers.join(", "))
+        .replace(/%clientDefaultPrefix%/g, client.def.prefix)
+        .replace(/%clientGuildCount%/g, client.guilds.cache.size)
+        .replace(/%clientChannelCount%/g, client.channels.cache.size)
+        .replace(/%clientUserCount%/g, client.users.cache.size);
     } else {
       return string;
     }
