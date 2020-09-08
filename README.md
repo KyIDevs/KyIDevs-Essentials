@@ -1,7 +1,7 @@
 # KyIDevs-Essentials
 ## Description
 KyIDevs's Essentials Bot for testing and management purposes. This bot will be an excellent template for starting a new bot.<br>
-Read through the [wiki](https://kyidevs.github.io/discord-bots/essentials) for more explanations.
+Read through the [docs](https://kyidevs.github.io/discord-bots/essentials) for more explanations.
 ## Starting
 ### Installing with Git
 Run the command below to get started with Git.
@@ -122,4 +122,4 @@ This project is maintained by [KyIDevs](https://github.com/KyIDevs) with help fr
 * Xignoqt
 
 ## Documentations
-For documentations, read the wiki [here](https://kyidevs.github.io/discord-bots/essentials/documentations).
+For documentations, read the docs [here](https://kyidevs.github.io/discord-bots/essentials/documentations).
