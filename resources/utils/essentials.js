@@ -86,7 +86,7 @@ module.exports = {
       return text;
     }
   },
-  async placeHolder(client, string) {
+  placeHolder(client, string) {
     const owner = client.users.cache.get(client.config.admin.owner.id);
     if (typeof string === "string") {
       return string
