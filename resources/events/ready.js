@@ -28,20 +28,21 @@ module.exports = {
   async execute(
     client, event
   ) {
-    client.footer = await Essentials.placeHolder(client, client.config.client.settings.footer);
     let activity = {};
-    activity.name = await Essentials.placeHolder(client, client.config.client.presence.activity.default.name);
-    activity.type = client.config.client.presence.activity.default.name;
-    activity.status = client.config.client.presence.activity.status;
+    async function setActv() {
+      activity.type = client.config.client.presence.activity.default.name;
+      activity.status = client.config.client.presence.activity.status;
+      activity.name = await Essentials.placeHolder(client, client.config.client.presence.activity.default.name);
+      client.user.setActivity(activity.name, {
+        type: activity.type
+      });
+      client.user.setStatus(activity.status);
+    }
+    client.footer = Essentials.placeHolder(client, client.config.client.settings.footer);
     try {
       // Set Activity every 30 seconds
-      setInterval(() => {
-        client.user.setActivity(
-          activity.name, {
-            type: activity.type
-          }
-        );
-        client.user.setStatus(activity.status);
+      setInterval(async () => {
+        await setActv().catch(err => Essentials.log(client, error))
       }, 5000);
     } catch (error) {
       Essentials.log(client, error);
