@@ -1,12 +1,4 @@
 {
-  "client": {
-    "presence": {
-      "activity": {
-        "name": "KyIDevs Essentials | )help | Starting System...",
-        "type": "PLAYING"
-      }
-    }
-  },
   "mongodb": {
     "username": "REQUIRED",
     "password": "REQUIRED",
