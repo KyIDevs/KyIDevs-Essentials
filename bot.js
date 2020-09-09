@@ -124,12 +124,12 @@ mongoose.connect(
 client.on("ready", async () => {
   client.footer = Essentials.placeHolder(client, config.client.settings.footer);
   let activity = {};
-  activity.name = Essentials.placeHolder(client, config.client.presence.activity.default.name);
   activity.type = config.client.presence.activity.default.name;
   activity.status = config.client.presence.activity.status;
   try {
     // Set Activity every 30 seconds
-    setInterval(() => {
+    setInterval(async () => {
+      activity.name = await Essentials.placeHolder(client, config.client.presence.activity.default.name);
       client.user.setActivity(
         activity.name, {
           type: activity.type
