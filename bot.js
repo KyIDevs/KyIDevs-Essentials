@@ -123,7 +123,7 @@ mongoose.connect(
 // Event Emitted: Ready //
 client.on("ready", async () => {
   client.footer = Essentials.placeHolder(client, config.client.settings.footer);
-  let activity;
+  let activity = {};
   activity.name = Essentials.placeHolder(client, config.client.presence.activity.default.name);
   activity.type = config.client.presence.activity.default.name;
   activity.status = config.client.presence.activity.status;
