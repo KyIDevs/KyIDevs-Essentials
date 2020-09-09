@@ -133,7 +133,8 @@ client.on("ready", async () => {
           type: client.activityType
         }
       );
-    }, 30000);
+      client.user.setStatus(config.client.presence.activity.status);
+    }, 5000);
   } catch (error) {
     Essentials.log(client, error);
   }
@@ -146,8 +147,6 @@ client.on("ready", async () => {
       .map(g => g.name)
       .join(", ")}`
   );
-  // Set Startup Status //
-  client.user.setStatus(config.client.presence.activity.status);
 });
 
 // Guild Join Event //
