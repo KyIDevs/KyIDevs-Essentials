@@ -38,7 +38,6 @@ module.exports = {
   async execute(client, command, message, args, auth, channel, guild) { // Function async execute()
     // Command Starts Here
     try {
-      const code = args.join(" ");
       let evaled = eval(args.join(" "));
       if (typeof evaled !== "string") evaled = require("util").inspect(evaled);
       const avtr = message.author.avatarURL() || message.author.defaultAvatarURL;
@@ -53,7 +52,7 @@ module.exports = {
       message.channel.send(embed);
     } catch (err) {
       const embed = Essentials.errorEmbed(err);
-      message.channel.send(embed);
+      message.channel.send((embed), { split: true });
     }
   }
 };
