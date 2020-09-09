@@ -125,15 +125,11 @@ client.on("ready", async () => {
   client.footer = Essentials.placeHolder(client, config.client.settings.footer);
   client.activityName = Essentials.placeHolder(client, config.client.presence.activity.default.name);
   client.activityType = config.client.presence.activity.default.name;
+  client.status = config.client.presence.activity.status;
   try {
     // Set Activity every 30 seconds
     setInterval(() => {
-      client.user.setActivity(
-        client.activityName, {
-          type: client.activityType
-        }
-      );
-      client.user.setStatus(config.client.presence.activity.status);
+      client.user.setPresence({ activity: { name: client.activityName, type: client.activityType }, status: client.status });
     }, 5000);
   } catch (error) {
     Essentials.log(client, error);
