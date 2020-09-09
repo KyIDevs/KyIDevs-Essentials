@@ -54,9 +54,11 @@ module.exports = {
     } else {
       user = client.users.cache.get(args[0]) || await fetchUser(args[0]);
     }
-    if (user.presence.activities[0] === undefined || !user.presence.activities[0]) activity = "**No Activity**";
-    else activity = user.presence.activities[0].state;
-    if (user.presence.activities[0].emoji) activity = user.presence.activities[0].emoji.name + " " + activity;
+    if (!user.presence.activities[0]) activity = "**No Activity**";
+    else {
+      activity = user.presence.activities[0].state;
+      if (user.presence.activities[0].emoji) activity = user.presence.activities[0].emoji.name + " " + activity;
+    }
     if (user.presence.status === "dnd") status = "Do Not Disturb";
     else status = user.presence.status;
     if (message.guild.member(user) === undefined || message.guild.member(user) === null || !message.guild.member(user)) joined = "User is not on the Server.";
