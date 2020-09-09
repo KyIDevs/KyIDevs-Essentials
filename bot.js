@@ -123,15 +123,14 @@ mongoose.connect(
 // Event Emitted: Ready //
 client.on("ready", async () => {
   client.footer = Essentials.placeHolder(client, config.client.settings.footer);
-  let client.activity;
-  client.activity.name = Essentials.placeHolder(client, config.client.presence.activity.default.name);
-  client.activity.type = config.client.presence.activity.default.name;
+  client.activityName = Essentials.placeHolder(client, config.client.presence.activity.default.name);
+  client.activityType = config.client.presence.activity.default.name;
   try {
     // Set Activity every 30 seconds
     setInterval(() => {
       client.user.setActivity(
-        client.activity.name, {
-          type: client.activity.type
+        client.activityName, {
+          type: client.activityType
         }
       );
     }, 30000);
