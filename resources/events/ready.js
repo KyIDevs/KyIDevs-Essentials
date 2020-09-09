@@ -55,5 +55,5 @@ module.exports = {
         .map(g => g.name)
         .join(", ")}`
     );
-  };
+  }
 };
