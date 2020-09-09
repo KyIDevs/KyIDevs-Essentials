@@ -122,19 +122,17 @@ mongoose.connect(
 
 // Event Emitted: Ready //
 client.on("ready", async () => {
-  function setActv() {
-    client.user.setActivity(
-      Essentials.placeHolder(client, config.client.presence.activity.default.name), {
-        type: config.client.presence.activity.default.name
-      }
-    );
-  }
-  setActv();
   client.footer = Essentials.placeHolder(client, config.client.settings.footer);
+  client.activity.name = Essentials.placeHolder(client, config.client.presence.activity.default.name);
+  client.activity.type = config.client.presence.activity.default.name;
   try {
     // Set Activity every 30 seconds
     setInterval(() => {
-      setActv();
+      client.user.setActivity(
+        client.activity.name, {
+          type: client.activity.type
+        }
+      );
     }, 30000);
   } catch (error) {
     Essentials.log(client, error);
@@ -142,7 +140,9 @@ client.on("ready", async () => {
   
   // Bot Ready Log //
   console.log(
-    `Logged in as ${client.user.tag}.\nThere are ${client.users.cache.size} users and/or bots online.\n${client.user.tag} connected to:\n${client.guilds.cache
+    `Logged in as ${client.user.tag}.\n`
+    + `There are ${client.users.cache.size} users and/or bots online.\n`
+    + `${client.user.tag} connected to:\n${client.guilds.cache
       .map(g => g.name)
       .join(", ")}`
   );
