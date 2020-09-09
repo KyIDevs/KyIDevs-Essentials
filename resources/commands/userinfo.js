@@ -37,6 +37,14 @@ module.exports = {
   admin: false, // Command is admin only
   async execute(client, command, message, args, auth, channel, guild) { // Function async execute()
     // Command Starts Here //
+    async function fetchUser (id) {
+      const user = await client.users.fetch(id)
+      if (!user) {
+        const string = "hat user does not exist!";
+        const embed = Essentials.constructNoticeEmbed(client, "error", string);
+        return message.channel.send(embed);
+      } else return user
+    }
     let user, activity, what, joined, status;
     if (isNaN(args[0])) {
       user = message.mentions.users.first();
@@ -44,7 +52,7 @@ module.exports = {
         user = message.author;
       }
     } else {
-      user = cient.users.cache.get(args[0]);
+      user = client.users.cache.get(args[0]) || await fetchUser(args[0]);
     }
     if (user.presence.activities[0] === undefined || !user.presence.activities[0]) activity = "**No Activity**";
     else activity = user.presence.activities[0].state;
