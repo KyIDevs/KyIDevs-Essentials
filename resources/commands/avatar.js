@@ -44,7 +44,7 @@ module.exports = {
         user = message.author;
       }
     } else {
-      user = cient.users.cache.get(args[0]);
+      user = client.users.cache.get(args[0]);
     }
     const avtr = message.author.avatarURL({format: "png", size: 1024, dynamic: true})  || message.author.defaultAvatarURL;
     const uvtr = user.avatarURL({format: "png", size: 1024, dynamic: true})  || user.defaultAvatarURL;
@@ -56,7 +56,7 @@ module.exports = {
       .setTimestamp()
       .setFooter(
         `Requested by ${message.author.username}`,
-        `${avtr}`
+        avtr
       );
     message.channel.send(embed)
   }
