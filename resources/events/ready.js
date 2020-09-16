@@ -28,25 +28,19 @@ module.exports = {
   async execute(
     client, event
   ) {
-    let activity = {};
-    async function setActv() {
-      activity.type = client.config.client.presence.activity.default.name;
-      activity.status = client.config.client.presence.activity.status;
-      activity.name = await Essentials.placeHolder(client, client.config.client.presence.activity.default.name);
-      client.user.setActivity(activity.name, {
-        type: activity.type
-      });
-      client.user.setStatus(activity.status);
-    }
-    client.footer = Essentials.placeHolder(client, client.config.client.settings.footer);
+    client.defaultAvatar = client.user.defaultAvatarURL;
+    if (client.config.client.image.avatar && client.config.client.image.avatar !== "<>") client.avatar = client.config.client.image.avatar;
+    else client.avatar = client.user.avatarURL({format: "png", size: 1024, dynamic: true}) || client.defaultAvatar;
     try {
-      // Set Activity every 30 seconds
-      setInterval(async () => {
-        await setActv().catch(err => Essentials.log(client, error))
+      client.user.setStatus(client.config.client.presence.activity.status);
+      setInterval(() => {
+        client.user.setActivity(
+          Essentials.placeHolder(client, client.config.client.presence.activity.default.name), {
+            type: client.config.client.presence.activity.default.type
+          }
+        );
+        client.footer = Essentials.placeHolder(client, client.config.client.settings.footer);
       }, 5000);
-    } catch (error) {
-      Essentials.log(client, error);
-    }
   
     // Bot Ready Log //
     console.log(
