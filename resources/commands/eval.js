@@ -35,6 +35,7 @@ module.exports = {
   permissions: ["SEND_MESSAGES", "READ_MESSAGE_HISTORY"], // Command Permissions
   memberPermissions: ["SEND_MESSAGES", "READ_MESSAGE_HISTORY", "MANAGE_GUILD"], // User is required to have these permissions
   admin: true, // Command is admin only
+  nsfw: false, // Command is NSFW only
   async execute(client, command, message, args, auth, channel, guild) { // Function async execute()
     // Command Starts Here
     try {
