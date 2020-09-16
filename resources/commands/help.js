@@ -35,6 +35,7 @@ module.exports = {
   permissions: ["SEND_MESSAGES", "READ_MESSAGE_HISTORY"], // Command Permissions
   memberPermissions: ["SEND_MESSAGES", "READ_MESSAGE_HISTORY"], // User is required to have these permissions
   admin: false, // Command is admin only
+  nsfw: false, // COmmand is NSFW only
   async execute(client, command, message, args, auth, channel, guild) { // Function async execute()
     // Command Starts Here //
     const subcmd = args[0];
@@ -49,38 +50,60 @@ module.exports = {
           "Use `" + client.prefix + command.id + "` `[sub-command]` to get detailed info."
         )
         .setFooter(client.footer, client.avatar)
-      const general = "`" + client.commands.filter(f => f.category === "General").map(e => `${e.id}`).join("`, `") + "`";
-      const utilities = "`" + client.commands.filter(f => f.category === "Utilities").map(e => `${e.id}`).join("`, `") + "`";
-      const servmngmt = "`" + client.commands.filter(f => f.category === "Server Management").map(e => `${e.id}`).join("`, `") + "`";
-      if (general) embed.addField("🍪 **| General**", general)
-      if (servmngmt) embed.addField("⚙️ **| Server Managements**", servmngmt)
-      if (utilities) embed.addField("🛠️ **| Utilities**", utilities)
+      
+      let categories = ["General", "Actions", "Utilities", "Server Management"];
+      let categories_emojis = ["🍪", "☢️", "📋", "⚙️"];
+      let categories_admin = ["🛠️", "Admin"];
+      let categories_nsfw = ["🔞", "NSFW"];
+      let cmds = [];
+      if (client.admin.concat(client.owner.split()).includes(message.author.id)) {
+        categories.push(categories_admin[1]);
+        categories_emojis.push(categories_admin[0]);
+      }
+      if (message.channel.nsfw) {
+        categories.push(categories_nsfw[1]);
+        categories_emojis.push(categories_nsfw[0]);
+      }
+      categories.forEach(c => {
+        let commands_list = "`" + client.commands.filter(f => f.category === c).map(e => `${e.id}`).join("`, `") + "`";
+        if (client.commands.filter(f => f.category === c))
+          cmds.push(commands_list)
+      })
+      for(count=0;count<cmds.length;count++) {
+        embed.addField(`${categories_emojis[count]} **|** ${categories[count]}`, cmds[count]);
+      }
       message.channel.send(embed);
     } else {
       const subcommand = client.commands.get(args[0])
         || client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(args[0]));
       if (subcommand) {
-        let usage;
-        if (subcommand.usage.length) usage = "`" + client.prefix + subcommand.id + "` `" + subcommand.usage.join("` `") + "`";
-        else usage = "`" + client.prefix + subcommand.id + "`";
-        const embed = new Discord.MessageEmbed()
-          .setTitle(`**${subcommand.name}**`)
-          .setAuthor(client.name, client.avatar)
-          .setColor(client.color.default)
-          .addField("**Category**", subcommand.category, true)
-          .addField("**Aliases**", '`' + subcommand.aliases.join("`, `") + '`', true)
-          .addField("**Cooldown**", `${subcommand.cooldown / 1000} seconds`, true)
-          .addField("**Usage**", usage)
-          .addField("**Examples**", '`' + subcommand.examples.join("`\n`") + '`')
-          .addField("**Permissions**", '`' + subcommand.permissions.join("`, `") + '`')
-          .addField("**User Required Permissions**", '`' + subcommand.memberPermissions.join("`, `") + '`')
-          .setFooter(client.footer, client.avatar);
-        if (subcommand.admin) embed.setDescription(subcommand.description + "\n**This command is admin-only.**");
-        else embed.setDescription(subcommand.description);
-        message.channel.send(embed);
+        if ((message.channel.nsfw && subcommand.nsfw == true) || subcommand.nsfw == false) {
+          let usage;
+          if (subcommand.usage.length) usage = "`" + client.prefix + subcommand.id + "` `" + subcommand.usage.join("` `") + "`";
+          else usage = "`" + client.prefix + subcommand.id + "`";
+          const embed = new Discord.MessageEmbed()
+            .setTitle(`**${subcommand.name}**`)
+            .setAuthor(client.name, client.avatar)
+            .setColor(client.color.default)
+            .addField("**Category**", subcommand.category, true)
+            .addField("**Aliases**", '`' + subcommand.aliases.join("`, `") + '`', true)
+            .addField("**Cooldown**", `${subcommand.cooldown / 1000} seconds`, true)
+            .addField("**Usage**", usage)
+            .addField("**Examples**", '`' + subcommand.examples.join("`\n`") + '`')
+            .addField("**Permissions**", '`' + subcommand.permissions.join("`, `") + '`')
+            .addField("**User Required Permissions**", '`' + subcommand.memberPermissions.join("`, `") + '`')
+            .setFooter(client.footer, client.avatar);
+          if (subcommand.admin) embed.setDescription(subcommand.description + "\n**This command is admin-only.**");
+          else embed.setDescription(subcommand.description);
+          message.channel.send(embed);
+        } else {
+          const string = "NSFWError: You can only use this subcommand in an NSFW Channel.";
+          const embed = Essentials.constructNoticeEmbed(client, "alert", string);
+          message.channel.send(embed);
+        }
       } else {
-        const string = client.emoji.false + " **That's not a valid Command!**" +
-          "\nType `" + client.prefix + command.id + "` to get the list of all Commands.";
+        const string = client.emoji.false + " That's not a valid Command!" +
+          "\nType " + client.prefix + command.id + " to get the list of all Commands.";
         const embed = Essentials.constructNoticeEmbed(client, "alert", string);
         message.channel.send(embed);
       }
