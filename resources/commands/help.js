@@ -51,8 +51,8 @@ module.exports = {
         )
         .setFooter(client.footer, client.avatar)
       
-      let categories = ["General", "Actions", "Utilities", "Server Management"];
-      let categories_emojis = ["🍪", "☢️", "📋", "⚙️"];
+      let categories = ["General", "Utilities", "Server Management"];
+      let categories_emojis = ["🍪", "📋", "⚙️"];
       let categories_admin = ["🛠️", "Admin"];
       let categories_nsfw = ["🔞", "NSFW"];
       let cmds = [];
