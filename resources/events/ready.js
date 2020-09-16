@@ -41,7 +41,9 @@ module.exports = {
         );
         client.footer = Essentials.placeHolder(client, client.config.client.settings.footer);
       }, 5000);
-  
+    } catch (error) {
+      Essentials.log(client, error);
+    }
     // Bot Ready Log //
     console.log(
       `Logged in as ${client.user.tag}.\n`
