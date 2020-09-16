@@ -97,13 +97,10 @@ for (var file of eventFiles) {
   console.log(`Loading event handler for event "${event.name}".`);
 }
 // Getting other global `client` variables //
-const owner = client.users.cache.get(config.admin.owner.id);
-client.owner = owner;
+client.owner = config.admin.owner.id;
+client.admin = config.admin.id;
 client.name = config.client.info.name;
 client.description = package.description;
-if (config.client.image.avatar) client.avatar = config.client.image.avatar;
-else client.avatar = client.user.avatarURL({format: "png", size: 1024, dynamic: true}) || client.user.defaultAvatarURl;
-
 // Connecting to MongoDB Database //
 mongoose.connect(
   `mongodb+srv://${login.mongodb.username}:${login.mongodb.password}@${login.mongodb.cluster.url}.mongodb.net/${login.mongodb.cluster.database}?retryWrites=true&w=majority`, {
@@ -121,7 +118,7 @@ mongoose.connect(
 //).catch(err => console.log(err));
 
 // Event Emitted: Ready //
-client.on("ready", async () => {
+client.on("ready", async () => {  
   const event = client.events.get("ready");
   if (event) {
     try {
