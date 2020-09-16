@@ -100,6 +100,7 @@ module.exports = {
         .replace(/%clientDevHelpers%/g, client.dev.helpers.join(", "))
         .replace(/%clientDefaultPrefix%/g, client.def.prefix)
         .replace(/%clientGuildCount%/g, client.guilds.cache.size)
+        .replace(/%clientUserCount%/g, client.users.cache.size)
         .replace(/%clientChannelCount%/g, client.channels.cache.size)
         .replace(/%clientPackageName%/g, client.package.name)
         .replace(/%clientVersion%/g, client.package.version)
