@@ -1,25 +1,3 @@
-///////////////////////////////////////////////////////////////////////////////////
-//                                                                               //
-//    KyIDevs Essentials is an Essentials Bot made by KyIDevs for a developer    //
-//    management system, including eval commands and easy-to-setup discord.js    //
-//    bot module.                                                                //
-//    Copyright (C) 2020 KyIDevs                                                 //
-//                                                                               //
-//    This program is free software: you can redistribute it and/or modify       //
-//    it under the terms of the GNU General Public License as published by       //
-//    the Free Software Foundation, either version 3 of the License, or          //
-//    (at your option) any later version.                                        //
-//                                                                               //
-//    This program is distributed in the hope that it will be useful,            //
-//    but WITHOUT ANY WARRANTY; without even the implied warranty of             //
-//    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the              //
-//    GNU General Public License for more details.                               //
-//                                                                               //
-//    You should have received a copy of the GNU General Public License          //
-//    along with this program.  If not, see <https://www.gnu.org/licenses/>.     //
-//                                                                               //
-///////////////////////////////////////////////////////////////////////////////////
-
 const Discord = require('discord.js');
 const User = require("../models/user.js");
 const Guild = require("../models/guild.js");
@@ -36,7 +14,6 @@ module.exports = {
     // Can be Online, Idle, DND //
     // or Invisible.            //
     //////////////////////////////
-    client.user.setStatus(client.config.client.presence.activity.status);
 
     // Disallows self trigger //
     if (message.author === client.user) return
@@ -52,9 +29,10 @@ module.exports = {
       message.channel.type === "dm"
     ) return message.author.send("Sorry, we don't support DMs yet.");
     
+    const avtr = message.author.avatarURL() || client.defaultAvatar;
+
     const debug = true;
     if (debug) {
-      const avtr = message.author.avatarURL() || message.author.defaultAvatarURL;
       const chnl = client.channels.cache.get(client.config.debug.chatlog);
       if (!chnl) return Essentials.log(client, "TypeError: The channel `chnl` doesn't exist or the bot isn't in the guild it's in!")
       if (message.content) {
@@ -114,8 +92,6 @@ module.exports = {
           }
           
             // Importing Commands //
-            const avtr = message.author.avatarURL() || message.author.defaultAvatarURL
-
             if (!guild) {
               client.prefix = client.def.prefix;
             } else {
@@ -163,17 +139,25 @@ module.exports = {
                     let allowUsage = false;
                     if (client.config.admin.id.concat(client.config.admin.owner.id.split()).includes(message.author.id)) isAdmin = true;
                     if (command.admin) {
-                      if (isAdmin = true) allowUsage = true;
+                      if (isAdmin === true) allowUsage = true;
                     } else allowUsage = true;
                     if (allowUsage) {
-                      if (message.guild.members.cache.get(client.user.id).permissions.has(command.permissions)) {
-                        if (message.member.permissions.has(command.memberPermissions) || message.member.permissions.has("ADMINISTRATOR")) {
-                          try {
-                            await command.execute(
-                              client, command, message, args, auth, channel, guild
-                            );
-                          } catch (err) {
-                            Essentials.log(client, err)
+                      if (message.guild.members.cache.get(client.user.id).permissions.has(command.permissions)
+                        || message.guild.members.cache.get(client.user.id).permissions.has('ADMINISTRATOR')
+                      ) {
+                        if (message.member.permissions.has(command.memberPermissions) || message.member.permissions.has('ADMINISTRATOR')) {
+                          if ((message.channel.nsfw && command.nsfw == true) || command.nsfw == false) {
+                            try {
+                              await command.execute(
+                                client, command, message, args, auth, channel, guild
+                              );
+                            } catch (err) {
+                              Essentials.log(client, err)
+                            }
+                          } else {
+                            const string = "NSFWError: You can only run this command in an NSFW Channel.";
+                            const embed = Essentials.constructNoticeEmbed(client, "alert", string);
+                            message.channel.send(embed);
                           }
                         } else {
                           const string = "PermissionsError: Check if you have these permissions:\n" + command.memberPermissions.join(", ");
