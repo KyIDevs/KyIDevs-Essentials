@@ -47,7 +47,8 @@ module.exports = {
           .addField("Content", message.content)
           .addFields(
             { name: "Guild", value: message.guild.name, inline: true },
-            { name: "Channel", value: message.channel.name, inline: true }
+            { name: "Channel", value: message.channel.name, inline: true },
+            { name: "Message Link", value: `[Message Link](https://discord.com/channels/${message.guild.id}/${message.channel.id}/${message.id})`, inline: true }
           )
           .setFooter(client.footer)
         chnl.send({ embed: embed });
